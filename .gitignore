@@ -7,6 +7,7 @@ meta.tex
 one.*
 ## Core latex/pdflatex auxiliary files:
 *.aux
+*.xdv
 *.lof
 *.log
 *.lot
