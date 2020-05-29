@@ -1,4 +1,34 @@
 \section{Data Preview 0}\label{sec:dp0}
+The first ideas about initial releases of \RO data were presented in \citeds{LSO-011}.
+There have since been delays in construction such that we have considered making Data Previews with
+simulated data or other non \RO data (see \secref{datasets}.
+
+We now propose to do this via the Intermediate Data Facility. This facility would only be for
+pre operation activities e.g. serving data and training operations staff.
+Commissioning actives would continue at NCSA and Chile.
+
+Here we discuss DP0 in more detail.
+
+\subsection {Interface}
+More ambitiously than  \citeds{LSO-011} we would like to allow access to DP0 via
+the Science Platform.
+\subsubsection{Images}
+Images would be accessible via a read only Gen3 butler repo.
+\subsubsection{Catalogs}
+Catalogs would be served via the VO TAP interface preferably backed by Qserv.
+
+
+
+\subsection {Dataset(s)} \label{sec:dataset}
+
+For DP0 we will use existing catalogs and products, images should be in a Gen3 S3 backed repository.
+
+From a usability perspective the best data set to use would be HSC PDR2. Though public use of
+this should be cleared with the HSC colleagues. This data set is well understood and semi regularly processed with our stack - it is therefore available in butler Gen3. It is real data which is potentially
+more interesting for exploration than simulated data.
+
+The main simulated data set would be DESC DC2. We need permission from the DESC colleagues. This is a large dataset and therefore interesting. It is currently only in Gen2 butler. There is a conversion script, however it
+runs serially and would take prohibitively long to convert to Gen3. We could use a subset which would be fine.  Putting DC2 catalogs in Qserv would be an excellent demonstration of its abilities.
 
 
 \subsection{Risks and mitigation}
