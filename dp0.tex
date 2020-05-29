@@ -21,11 +21,10 @@ Catalogs would be served via the VO TAP interface preferably backed by Qserv.
 
 \subsection {Dataset(s)} \label{sec:dataset}
 
-For DP0 we will use existing catalogs and products, images should be in a Gen3 S3 backed repository.
+For DP0 we will use existing catalogs and products, images should be in a Gen3 Object Store backed repository (with S3 interface).
 
 From a usability perspective the best data set to use would be HSC PDR2. Though public use of
-this should be cleared with the HSC colleagues. This data set is well understood and semi regularly processed with our stack - it is therefore available in butler Gen3. It is real data which is potentially
-more interesting for exploration than simulated data.
+this should be cleared with the HSC colleagues. This data set is well understood and semi regularly processed with our stack.  It is real data which is potentially more interesting for exploration than simulated data. The current repos are Gen2 so would need conversion meaning some subset may have to be used.
 
 The main simulated data set would be DESC DC2. We need permission from the DESC colleagues. This is a large dataset and therefore interesting. It is currently only in Gen2 butler. There is a conversion script, however it
 runs serially and would take prohibitively long to convert to Gen3. We could use a subset which would be fine.  Putting DC2 catalogs in Qserv would be an excellent demonstration of its abilities.
