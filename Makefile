@@ -29,6 +29,10 @@ acronyms.tex: $(tex) myacronyms.txt
 aglossary.tex :$(tex) myacronyms.txt
 	generateAcronyms.py  -g $(tex)
 
+# pick up this form the lsst-texmf/bin
+tables: .FORCE
+	cd tables; makeTablesFromGoogle.py 1RCXFwnVfXgR-WxFO4dfYRZuMX8egz35nABODKANEAUo miles\!A1:F 
+
 
 .PHONY: clean
 clean:
