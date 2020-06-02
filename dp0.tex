@@ -13,7 +13,55 @@ Two major new developments have occured since \citeds{LSO-011} was drafted:
 
 \end{itemize}
 
-In this document we outline notable elements of DP0, the first of these planned data previews, from the Data Management and Pre-Operations perspective. 
+In this document we outline notable elements of DP0, the first of these planned data previews, from the Data Management and Pre-Operations perspective.
+
+\section{Elements of Data Preview 0}
+
+In this section we discuss the following key topics:
+
+\begin{itemize}
+
+\item Dataset choice considerations
+
+\item Data products offered
+
+\item Services offered
+
+\item Audience considerations
+
+\end{itemize}
+
+\subsection {Dataset choice considerations} \label{sec:dataset}
+
+The Construction Project has been working for some time now with a number of pre-cursor datasets and simulated data. There are two leading candidates for forming the basis of DP0:
+
+\begin{itemize}
+  
+\item The Subaru Hyper Suprime-Cam PDR2 dataset, provided permission can be secured from our HSC colleagues. As real (on-sky) data it is likely that users will interact with it in more realistic ways. It is a well understood dataset, and it is regulary re-processed with software that shares a common codebase with the LSST Science Pipelines. 
+
+\item The simulated precursor to LSST data produced by the Dark Energy Survey, DESC DC2, provided permission can be secured. This is a very large dataset and putting DC2 catalogs in Qserv would be an excellent demonstration of its abilities.
+
+\end{itemize}
+
+Data Management is currently in transition between its 2nd and 3rd generation data abstraction layer (aka ``Butler''). For DP0 to fulfil its aim as an early deployment/integration exercise, Gen 3 Butler must be used. This has bearing on the choice of dataset. HSC PDR2 can either be converted from Gen 2 to Gen 3 or (stretch goal but ideally?) reprocessed natively with Gen3. Hence this is preferred choice from an engineering point of view. 
+
+DESC2 is available through Gen2 Butler and as we do not process that data with the Science Pipelines, the only option is conversion to Gen3 but estimates are that this is such a time-consuming process that it cannot be done in time for DC2. Therefore if DC2 is to be involved, a significantly smaller subset would have to be selected. 
+
+Questions:
+
+\begin{itemize}
+  
+\item Which dataset has the broader scientific interest
+
+\item If DC2 and we take a subset to avoid the Gen2-Gen3 conversion issues, will that reduce the usefulness of picking DC2 in the first place?
+
+\end{itemize}
+
+\subsection{Data Products Offered}
+
+
+
+For DP0 we will use existing catalogs and products, images should be in a Gen3 Object Store backed repository (with S3 interface).
 
 
 \subsection {Interface}
@@ -24,20 +72,18 @@ Images would be accessible via a read only Gen3 butler repo.
 \subsubsection{Catalogs}
 Catalogs would be served via the VO TAP interface preferably backed by Qserv.
 
+\subsection{Audience Considerations}
+
+Questions:
+
+\begin{itemize}
+
+\item What is the authorisation constraints for this data? For example, are DC2 data products anly available to DESC science collaboration members? If so, if DC2 is chosen, does only DESC participate in DP0? 
+  
+\end{itemize}
 
 
-\subsection {Dataset(s)} \label{sec:dataset}
-
-For DP0 we will use existing catalogs and products, images should be in a Gen3 Object Store backed repository (with S3 interface).
-
-From a usability perspective the best data set to use would be HSC PDR2. Though public use of
-this should be cleared with the HSC colleagues. This data set is well understood and semi regularly processed with our stack.  It is real data which is potentially more interesting for exploration than simulated data. The current repos are Gen2 so would need conversion meaning some subset may have to be used.
-
-The main simulated data set would be DESC DC2. We need permission from the DESC colleagues. This is a large dataset and therefore interesting. It is currently only in Gen2 butler. There is a conversion script, however it
-runs serially and would take prohibitively long to convert to Gen3. We could use a subset which would be fine.  Putting DC2 catalogs in Qserv would be an excellent demonstration of its abilities.
-
-
-\subsection{Risks and mitigation}
+\section{Risks and mitigation}
 
 The biggest schedule risk is not getting an interim data facility in place in time.
 This would delay the entire schedule and there is not much mitigation.
