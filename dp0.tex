@@ -1,7 +1,6 @@
 \section{Data Preview 0}\label{sec:dp0}
 
-In \citeds{LSO-011} we outlined a number of scenarios for early releases of \RO data.
-The purpose of the these releases are not only to prepare the community for LSST data, but also to serve as an early integration test of existing elements of the Data Management systems and to familiarize the community with our access mechanisms.  
+In \citeds{LSO-011} we outlined a number of scenarios for early releases of \RO data. The purpose of the these releases are not only to prepare the community for LSST data, but also to serve as an early integration test of existing elements of the Data Management systems and to familiarize the community with our access mechanisms.  
 
 Two major new developments have occured since \citeds{LSO-011} was drafted:
 
@@ -43,7 +42,7 @@ The Construction Project has been working for some time now with a number of pre
 
 \end{itemize}
 
-Data Management is currently in transition between its 2nd and 3rd generation data abstraction layer (aka ``Butler''). For DP0 to fulfil its aim as an early deployment/integration exercise, Gen 3 Butler must be used. This has bearing on the choice of dataset. HSC PDR2 can either be converted from Gen 2 to Gen 3 or (stretch goal but ideally?) reprocessed natively with Gen3. Hence this is preferred choice from an engineering point of view. 
+Data Management is currently in transition between its 2nd and 3rd generation data abstraction layer (aka ``Butler''). For DP0 to fulfil its aim as an early deployment/integration exercise, Gen 3 Butler must be used, preferably (stretch goal) using an S3 compliant Object Store as is the intent in production. This has bearing on the choice of dataset. HSC PDR2 can either be converted from Gen 2 to Gen 3 or (stretch goal but ideally?) reprocessed natively with Gen3. Hence this is preferred choice from an engineering point of view. 
 
 DESC2 is available through Gen2 Butler and as we do not process that data with the Science Pipelines, the only option is conversion to Gen3 but estimates are that this is such a time-consuming process that it cannot be done in time for DC2. Therefore if DC2 is to be involved, a significantly smaller subset would have to be selected. 
 
@@ -55,30 +54,80 @@ Questions:
 
 \item If DC2 and we take a subset to avoid the Gen2-Gen3 conversion issues, will that reduce the usefulness of picking DC2 in the first place?
 
+\item Will we be able to do Butler over S3 at production grade by DP0 ? 
+
 \end{itemize}
 
 \subsection{Data Products Offered}
 
+We will offer access to images and catalogues, though in more limited ways that will be available in Operations.
 
+Images will be stored in read-ony Butler Gen3 repo.
 
-For DP0 we will use existing catalogs and products, images should be in a Gen3 Object Store backed repository (with S3 interface).
-
-
-\subsection {Interface}
-More ambitiously than  \citeds{LSO-011} we would like to allow access to DP0 via
-the Science Platform.
-\subsubsection{Images}
-Images would be accessible via a read only Gen3 butler repo.
-\subsubsection{Catalogs}
-Catalogs would be served via the VO TAP interface preferably backed by Qserv.
-
-\subsection{Audience Considerations}
+Catalogues will be stored in Qserv. 
 
 Questions:
 
 \begin{itemize}
 
-\item What is the authorisation constraints for this data? For example, are DC2 data products anly available to DESC science collaboration members? If so, if DC2 is chosen, does only DESC participate in DP0? 
+\item Are we offering parquet files?
+
+\item We should presumably explicitly rule out bulk download
+
+\item When does ingest into Qserv has to start to be ready by DP0?
+
+\end{itemize}
+
+\subsection{Services Offered}
+
+Although DP0 as a milestone described \citeds{LSO-011} can be fulfilled with simple data distribution, we intend to offer limited Science Platform functionality as part of DP0. This includes:
+
+\begin{itemize}
+
+\item Provided the data is stored in Qserv or a Postgres database, catalogue access through TAP
+
+\item Access to the Science Platform's notebook-based analysis environment (nublado); images can be accessed programatically via the Butler. 
+
+\item Federated Authentication
+   
+\end{itemize}
+
+Shell access (except through nublado) will not be offered.
+
+Questions:
+
+\begin{itemize}
+
+\item Is it understood that portal is not included?
+
+\end{itemize}
+
+
+\subsection{Audience Considerations}
+
+Care should be taken to limit the target audience for the data previews; it is most critical that this is done for DP0.
+
+\begin{itemize}
+
+\item We have limited capacity to divert resources to support users.
+
+\item We will not have performed scaling tests on the Science Platform services by that point; current Science Platform usage is under 100 users, and any intent to exceed that should be communicated well in advance
+
+\item We will not yet have the ability to throttle excessive IDF usage
+
+\end{itemize}
+
+Authorisation will be provided in an all-in basis (users will have the same level of access as project members currently have) since finer accessc control mechanisms will not be available by DP0; care should be taken in selecting them. 
+
+Questions:
+
+\begin{itemize}
+
+\item What is the authorisation constraints for this data? For example, are DC2 data products anly available to DESC science collaboration members? If so, if DC2 is chosen, does only DESC participate in DP0?
+
+\item How do we handle access? First come first served? Do we need a sign-up process?
+
+\item How do we intend to do support? Slack? JIRA? CLO? 
   
 \end{itemize}
 
