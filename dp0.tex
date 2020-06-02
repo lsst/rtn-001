@@ -1,36 +1,138 @@
 \section{Data Preview 0}\label{sec:dp0}
-The first ideas about initial releases of \RO data were presented in \citeds{LSO-011}.
-There have since been delays in construction such that we have considered making Data Previews with
-simulated data or other non \RO data (see \secref{datasets}).
 
-We now propose to do this via the Intermediate Data Facility. This facility would only be for
-pre operation activities e.g. serving data and training operations staff.
-Commissioning actives would continue at NCSA and Chile.
+In \citeds{LSO-011} we outlined a number of scenarios for early releases of \RO data. The purpose of the these releases are not only to prepare the community for LSST data, but also to serve as an early integration test of existing elements of the Data Management systems and to familiarize the community with our access mechanisms.  
 
-Here we discuss DP0 in more detail.
+Two major new developments have occured since \citeds{LSO-011} was drafted:
 
-\subsection {Interface}
-More ambitiously than  \citeds{LSO-011} we would like to allow access to DP0 via
-the Science Platform.
-\subsubsection{Images}
-Images would be accessible via a read only Gen3 butler repo.
-\subsubsection{Catalogs}
-Catalogs would be served via the VO TAP interface preferably backed by Qserv.
+\begin{itemize}
+  
+\item There have since been delays in construction such that we are now planning on making Data Previews with \RO simulated data or on-sky data from other observatories (see \secref{datasets}) which would still allow us to meet some of the goals of the early releases. 
+
+\item We are planning on carrying these activities at the Intermediate Data Facility, which is is dedicated to Pre-Ops activities infrastructure needs such as serving data and training operations staff (commissioning actives will continue at NCSA and Chile).
+
+\end{itemize}
+
+In this document we outline notable elements of DP0, the first of these planned data previews, from the Data Management and Pre-Operations perspective.
+
+\section{Elements of Data Preview 0}
+
+In this section we discuss the following key topics:
+
+\begin{itemize}
+
+\item Dataset choice considerations
+
+\item Data products offered
+
+\item Services offered
+
+\item Audience considerations
+
+\end{itemize}
+
+\subsection {Dataset choice considerations} \label{sec:dataset}
+
+The Construction Project has been working for some time now with a number of pre-cursor datasets and simulated data. There are two leading candidates for forming the basis of DP0:
+
+\begin{itemize}
+  
+\item The Subaru Hyper Suprime-Cam PDR2 dataset, provided permission can be secured from our HSC colleagues. As real (on-sky) data it is likely that users will interact with it in more realistic ways. It is a well understood dataset, and it is regulary re-processed with software that shares a common codebase with the LSST Science Pipelines. 
+
+\item The simulated precursor to LSST data produced by the Dark Energy Survey, DESC DC2, provided permission can be secured. This is a very large dataset and putting DC2 catalogs in Qserv would be an excellent demonstration of its abilities.
+
+\end{itemize}
+
+Data Management is currently in transition between its 2nd and 3rd generation data abstraction layer (aka ``Butler''). For DP0 to fulfil its aim as an early deployment/integration exercise, Gen 3 Butler must be used, preferably (stretch goal) using an S3 compliant Object Store as is the intent in production. This has bearing on the choice of dataset. HSC PDR2 can either be converted from Gen 2 to Gen 3 or (stretch goal but ideally?) reprocessed natively with Gen3. Hence this is preferred choice from an engineering point of view. 
+
+DESC2 is available through Gen2 Butler and as we do not process that data with the Science Pipelines, the only option is conversion to Gen3 but estimates are that this is such a time-consuming process that it cannot be done in time for DC2. Therefore if DC2 is to be involved, a significantly smaller subset would have to be selected. 
+
+Questions:
+
+\begin{itemize}
+  
+\item Which dataset has the broader scientific interest
+
+\item If DC2 and we take a subset to avoid the Gen2-Gen3 conversion issues, will that reduce the usefulness of picking DC2 in the first place?
+
+\item Will we be able to do Butler over S3 at production grade by DP0 ? 
+
+\end{itemize}
+
+\subsection{Data Products Offered}
+
+We will offer access to images and catalogues, though in more limited ways that will be available in Operations.
+
+Images will be stored in read-ony Butler Gen3 repo.
+
+Catalogues will be stored in Qserv. 
+
+Questions:
+
+\begin{itemize}
+
+\item Are we offering parquet files?
+
+\item We should presumably explicitly rule out bulk download
+
+\item When does ingest into Qserv has to start to be ready by DP0?
+
+\end{itemize}
+
+\subsection{Services Offered}
+
+Although DP0 as a milestone described \citeds{LSO-011} can be fulfilled with simple data distribution, we intend to offer limited Science Platform functionality as part of DP0. This includes:
+
+\begin{itemize}
+
+\item Provided the data is stored in Qserv or a Postgres database, catalogue access through TAP
+
+\item Access to the Science Platform's notebook-based analysis environment (nublado); images can be accessed programatically via the Butler. 
+
+\item Federated Authentication
+   
+\end{itemize}
+
+Shell access (except through nublado) will not be offered.
+
+Questions:
+
+\begin{itemize}
+
+\item Is it understood that portal is not included?
+
+\end{itemize}
 
 
+\subsection{Audience Considerations}
 
-\subsection {Dataset(s)} \label{sec:dataset}
+Care should be taken to limit the target audience for the data previews; it is most critical that this is done for DP0.
 
-For DP0 we will use existing catalogs and products, images should be in a Gen3 Object Store backed repository (with S3 interface).
+\begin{itemize}
 
-From a usability perspective the best data set to use would be HSC PDR2. Though public use of
-this should be cleared with the HSC colleagues. This data set is well understood and semi regularly processed with our stack.  It is real data which is potentially more interesting for exploration than simulated data. The current repos are Gen2 so would need conversion meaning some subset may have to be used.
+\item We have limited capacity to divert resources to support users.
 
-The main simulated data set would be DESC DC2. We need permission from the DESC colleagues. This is a large dataset and therefore interesting. It is currently only in Gen2 butler. There is a conversion script, however it
-runs serially and would take prohibitively long to convert to Gen3. We could use a subset which would be fine.  Putting DC2 catalogs in Qserv would be an excellent demonstration of its abilities.
+\item We will not have performed scaling tests on the Science Platform services by that point; current Science Platform usage is under 100 users, and any intent to exceed that should be communicated well in advance
+
+\item We will not yet have the ability to throttle excessive IDF usage
+
+\end{itemize}
+
+Authorisation will be provided in an all-in basis (users will have the same level of access as project members currently have) since finer accessc control mechanisms will not be available by DP0; care should be taken in selecting them. 
+
+Questions:
+
+\begin{itemize}
+
+\item What is the authorisation constraints for this data? For example, are DC2 data products anly available to DESC science collaboration members? If so, if DC2 is chosen, does only DESC participate in DP0?
+
+\item How do we handle access? First come first served? Do we need a sign-up process?
+
+\item How do we intend to do support? Slack? JIRA? CLO? 
+  
+\end{itemize}
 
 
-\subsection{Risks and mitigation}
+\section{Risks and mitigation}
 
 The biggest schedule risk is not getting an interim data facility in place in time.
 This would delay the entire schedule and there is not much mitigation.
