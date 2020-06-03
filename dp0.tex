@@ -1,12 +1,12 @@
 \section{Data Preview 0}\label{sec:dp0}
 
-In \citeds{LSO-011} we outlined a number of scenarios for early releases of \RO data. The purpose of the these releases are not only to prepare the community for LSST data, but also to serve as an early integration test of existing elements of the Data Management systems and to familiarize the community with our access mechanisms.
+In \citeds{LSO-011} we outlined a number of scenarios for early releases of \RO~data. The purpose of the these releases are not only to prepare the community for LSST data, but also to serve as an early integration test of existing elements of the Data Management systems and to familiarize the community with our access mechanisms.
 
 Two major new developments have occurred since \citeds{LSO-011} was drafted:
 
 \begin{itemize}
 
-\item There have since been delays in construction such that we are now planning on making Data Previews with \RO simulated data or on-sky data from other observatories (see \secref{sec:dataset}) which would still allow us to meet some of the goals of the early releases.
+\item There have since been delays in construction such that we are now planning on making Data Previews with \RO~simulated data or on-sky data from other observatories (see \secref{sec:dataset}) which would still allow us to meet some of the goals of the early releases.
 
 \item We are planning on carrying these activities at the Intermediate Data Facility, which is is dedicated to Pre-Ops activities infrastructure needs such as serving data and training operations staff (commissioning actives will continue at NCSA and Chile).
 
@@ -42,7 +42,7 @@ The Construction Project has been working for some time now with a number of pre
 
 \end{itemize}
 
-Data Management is currently in transition between its 2nd and 3rd generation data abstraction layer (aka ``Butler''). For DP0 to fulfill its aim as an early deployment/integration exercise, Gen 3 Butler must be used, preferably (stretch goal) using an S3 compliant Object Store as is the intent in production. This has bearing on the choice of dataset. HSC PDR2 can either be converted from Gen 2 to Gen 3 or (stretch goal but ideally?) reprocessed naively with Gen3. Hence this is preferred choice from an engineering point of view.
+Data Management is currently in transition between its 2nd and 3rd generation data abstraction layer (aka ``Butler''). For DP0 to fulfill its aim as an early deployment/integration exercise, Gen 3 Butler must be used, preferably (stretch goal) using an S3 compliant Object Store as is the intent in production. This has bearing on the choice of dataset. HSC PDR2 can either be converted from Gen 2 to Gen 3 or (stretch goal but ideally) reprocessed naively with Gen3. A smaller subset may be necessary to avoid production scaling issues. This is preferred choice from an engineering point of view.
 
 DESC2 is available through Gen2 Butler and as we do not process that data with the Science Pipelines, the only option is conversion to Gen3 but estimates are that this is such a time-consuming process that it cannot be done in time for DC2. Therefore if DC2 is to be involved, a significantly smaller subset would have to be selected.
 
@@ -52,9 +52,11 @@ Questions:
 
 \item Which dataset has the broader scientific interest
 
-\item If DC2 and we take a subset to avoid the Gen2-Gen3 conversion issues, will that reduce the usefulness of picking DC2 in the first place?
+\item For either dataset if we take a subset to avoid the Gen2-Gen3 conversion issues or production scaling issues, will that reduce the usefulness of the datasets or affect the choice?
 
-\item Will we be able to do Butler over S3 at production grade by DP0 ?
+\item What would be the smallest data size that is still scientifically interesting?
+
+\item Will we be able to do Butler over S3 and Postgres at production grade by DP0 ?
 
 \end{itemize}
 
@@ -66,11 +68,13 @@ Images will be stored in read-only Butler Gen3 repo.
 
 Catalogues will be stored in Qserv.
 
+We may provide images and catalogs from different production runs based on the same dataset.
+
 Questions:
 
 \begin{itemize}
 
-\item Are we offering parquet files?
+\item Are we offering parquet files? --- No promise. Currently our SDMified parquet-generating pipelines are HSC only and Gen2 only.
 
 \item We should presumably explicitly rule out bulk download  --- YES
 
