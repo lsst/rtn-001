@@ -40,12 +40,12 @@ The Construction Project has been working for some time now with a number of pre
 
 \item The Subaru Hyper Suprime-Cam PDR2 dataset, provided permission can be secured from our HSC colleagues. As real (on-sky) data it is likely that users will interact with it in more realistic ways. It is a well understood dataset, and it is regularly re-processed with software that shares a common codebase with the LSST Science Pipelines.
 
-\item The simulated precursor to LSST data produced by the Dark Energy Survey, DESC DC2, provided permission can be secured. This is a very large dataset and putting DC2 catalogs in Qserv would be an excellent demonstration of its abilities.
+\item The simulated precursor to LSST data produced by the Dark Energy Science Collaboration, DESC DC2, provided permission can be secured. This is a very large dataset and putting DC2 catalogs in Qserv would be an excellent demonstration of its abilities.
 
 \end{itemize}
 
 There is interest from the science collaborations in working with data products from both of these datasets. DC2 was emphasized at the 2019 PCW, and at least one (AGN) has contributed to the simulation inputs since then. A comment at the PCW discussion was that without DC2 in DP0, the science collaborations would not see full frame LSST data until the year before the survey, too late for the needed analysis development.
-% PJM: to re-live the PCW2019 session, see the slide deck at https://docs.google.com/presentation/d/1tRHdSyXBRp850zfJO5NssHS-fGfGMMngDEfAD9Azdk4/edit#slide=id.g5e4570c6eb_0_10 and the notes at https://docs.google.com/document/d/1fSNwsT12hTQGZsH--C6sIY58k6ODHx4vnsPfQa82t9Q/edit#heading=h.8o7p552v6klp 
+% PJM: to re-live the PCW2019 session, see the slide deck at https://docs.google.com/presentation/d/1tRHdSyXBRp850zfJO5NssHS-fGfGMMngDEfAD9Azdk4/edit#slide=id.g5e4570c6eb_0_10 and the notes at https://docs.google.com/document/d/1fSNwsT12hTQGZsH--C6sIY58k6ODHx4vnsPfQa82t9Q/edit#heading=h.8o7p552v6klp
 
 Data Management is currently in transition between its 2nd and 3rd generation data abstraction layer (aka ``Butler''). For DP0 to fulfill its aim as an early deployment/integration exercise, Gen 3 Butler must be used, preferably (stretch goal) using an S3 compliant Object Store as is the intent in production. This has bearing on the choice of dataset.
 
