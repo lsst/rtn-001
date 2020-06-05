@@ -7,7 +7,9 @@ The Operations era org chart is shown in \figref{fig:org}.
 
 
 \begin{figure}
-\includegraphics[width=0.6\textwidth]{images/Ops_Org_Chart}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/Ops_Org_Chart}
+\end{center}
 \caption{ Organization of departments and teams  for operations of \RO. \label{fig:org}}
 \end{figure}
 
@@ -25,13 +27,16 @@ with team leads for each team.
 For DP0 on IDF Hsin-Fang Chiang would coordinate Data Production activities and be the point
 of contact for the IDF provider.
 There is preops effort (fractional FTE) available in Execution and Pipelines as well as Middleware teams.
+The roles etc need some clean up from the ops proposal but the DP Roles are listed in \tabref{tab:teams} though the exact mix of roles is still under discussion.
 
-{\color{red} Should we start to list names here?}
 
 \subsection{SP Quality  and Community Support} \label{sec:sp}
 
 {\bf Leanne .. }
 
+\begin{itemize}
+\item How do we intend to do support? Slack? JIRA? CLO?
+\end{itemize}
 
 
 \subsection{Planning}
@@ -39,7 +44,19 @@ There is preops effort (fractional FTE) available in Execution and Pipelines as 
 \subsubsection{Middleware}
 There are obvious middleware milestones such as DP-MW-M-01 read only Gen3 Butler which are needed from the construction project.
 There is still installation work needed for the that on Google which includes the need for a Postgress (like) database for the registry. The DAX team are on the hook for this.
+For DP0.2 we need Butler to handle processing, not just locating files (DP-MW-M-04).
 
-\paragraph{Qserv} getting DC2 loaded in qserv is also a DAX activity. There
+\paragraph{Qserv} should be installed  and configured. Though we have some prior art for this we
+still will need some experimentation to get it correct. Getting DC2 loaded in Qserv is also a DAX activity
+we will have to do on IDF.
+
+\paragraph{Workflow} needs to be functioning at scale for DP0.2, ideally we should basic workflow
+early on (milestone DP-MW-M-02). Then more tooling such as restarting failed jobs (DP-MW-M-03)
+
+\subsubsection{ Science Platform}
+The science platform and web services need to be deployed. In principle this is reasonable straight forward, an open issue may be configuring of the Portal aspect for the chosen  dataset(s).
+
+\subsubsection{ Pipelines }
+For DP0.2 we need a Gen3 version of the pipelines to process the dataset. This will have to run at scale for PDR2 or DC2. There may be several runs for quality purposes.
 
 

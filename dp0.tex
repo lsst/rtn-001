@@ -14,7 +14,9 @@ Two major new developments have occurred since \citeds{LSO-011} was drafted:
 
 In this document we outline notable elements of DP0, the first of these planned data previews, from the Data Management and Pre-Operations perspective.
 
-\section{Elements of Data Preview 0}
+Data Preview 0 itself is broken down in several parts: 0.1 servings existing data aproducts, 0.2 reprocessing that data and publishing new catalgos.
+
+\subsection{Elements of Data Preview 0.1}
 
 % PJM: Is this section only about DP0.1, serving catalog data from pre-processed images? I think we need to explain the different phases of DP0 at the start, when we show the milestones. And then conisder the dataset options in that context, eg it could be a different mix of data in DP0.1 from DP0.2. Note that a DP0.3 is also possible, given the time available in FY22.
 
@@ -32,7 +34,7 @@ In this section we discuss the following key topics:
 
 \end{itemize}
 
-\subsection {Dataset choice considerations} \label{sec:dataset}
+\subsubsection {Dataset choice considerations} \label{sec:dataset}
 
 The Construction Project has been working for some time now with a number of pre-cursor datasets and simulated data. There are two leading candidates for forming the basis of DP0:
 
@@ -61,19 +63,19 @@ Questions:
 
 \item For either dataset if we take a subset to avoid the Gen2-Gen3 conversion issues or production scaling issues, will that reduce the usefulness of the datasets or affect the choice? What would be the smallest data size that is still scientifically interesting?
 
-\item Will we be able to do Butler over S3 and Postgres at production grade by DP0?
+\item Are there HiPs maps availble for either of these ?
+
+%butler moved to risks
 
 \item Given the delayed construction/commissioning schedule, could we consider including both of these datasets in DP0 over the course of FY21--FY22?
 
 \end{itemize}
 
-\subsection{Data Products Offered}
+\subsubsection{Data Products Offered}
 
 We will offer access to images and catalogs, though in more limited ways that will be available in Operations.
-
 Images will be stored in read-only Butler Gen3 repo.
-
-Catalogues will be stored in Qserv.
+Catalogs will be stored in Qserv.
 
 We may provide images and catalogs from different production runs based on the same dataset.
 
@@ -89,7 +91,7 @@ Questions:
 
 \end{itemize}
 
-\subsection{Services Offered}
+\subsubsection{Services Offered}
 
 Although DP0 as a milestone described \citeds{LSO-011} can be fulfilled with simple data distribution, we intend to offer limited Science Platform functionality as part of DP0. This includes:
 
@@ -114,7 +116,7 @@ Questions:
 \end{itemize}
 
 
-\subsection{Audience Considerations}
+\subsubsection{Audience Considerations}
 
 Care should be taken to limit the target audience for the data previews; it is most critical that this is done for DP0.
 
@@ -139,17 +141,16 @@ Questions:
 
 \item How do we handle access? First come first served? Do we need a sign-up process?
 
-\item How do we intend to do support? Slack? JIRA? CLO?
-
+%support moved to SP section
 \end{itemize}
 
-\section{DP0.2 - processing}
+\subsection{DP0.2 - processing}
 
 The Milestone DP-SP-02 includes re processing on IDF of the data set previously served as part of DP-SP-01.
 This requires a workflow system and associated tools to preferable make this quite automated.
 Demonstrating a portable set of cloud enabled tools based on Butler Gen 3 and HTCondor would help to allay the main risk of moving to a new Data Facility in operations.
 
-\section{Risks and mitigation}
+\subsection{Risks and mitigation}
 
 The biggest schedule risk is not getting an interim data facility in place in time.
 This would delay the entire schedule and there is not much mitigation.
@@ -157,3 +158,5 @@ This would delay the entire schedule and there is not much mitigation.
 In the long run costs may be higher than expected in a cloud based IDF. This will be due to storage.
 An mitigation to this would be to store data on our own systems (NCSA or Chile) and expose it through S3.
 NCSA already have this in place and we should consider testing this for lesser used data sets.
+
+There is some risk that  Butler over S3 and Postgres  might not be at  production grade by DP0. We are working hard on that in construction. There is the possibility to run Gen 3 over a filesystem whic would not be ideal on the cloud. If Gen3 does not work at all we will have to have a major rethink and build a much simpler butler.
