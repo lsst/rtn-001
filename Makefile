@@ -14,7 +14,7 @@ endif
 export TEXMFHOME ?= lsst-texmf/texmf
 
 # Add aglossary.tex as a dependancy here if you want a glossary
-$(DOCNAME).pdf: $(tex) meta.tex local.bib
+$(DOCNAME).pdf: $(tex) meta.tex local.bib acronyms.tex
 	latexmk -bibtex -xelatex -f $(DOCNAME)
 #	makeglossaries $(DOCNAME)      
 #	xelatex $(SRC)
@@ -28,6 +28,10 @@ acronyms.tex: $(tex) myacronyms.txt
 # If you want a glossary you must manually run generateAcronyms.py  -gu to put the \gls in your files.
 aglossary.tex :$(tex) myacronyms.txt
 	generateAcronyms.py  -g $(tex)
+
+# pick up this form the lsst-texmf/bin
+tables: .FORCE
+	cd tables; makeTablesFromGoogle.py 1RCXFwnVfXgR-WxFO4dfYRZuMX8egz35nABODKANEAUo miles\!A1:F Team\!A1:H
 
 
 .PHONY: clean

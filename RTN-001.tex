@@ -1,4 +1,4 @@
-\documentclass[DM,authoryear,toc]{lsstdoc}
+\documentclass[OPS,authoryear,lsstdraft]{lsstdoc}
 % lsstdoc documentation: https://lsst-texmf.lsst.io/lsstdoc.html
 \input{meta}
 
@@ -12,8 +12,6 @@
 
 \title{Data Preview 0: Definition and planning.}
 
-% Optional subtitle
-% \setDocSubtitle{A subtitle}
 
 \author{%
 William O'Mullane
@@ -29,9 +27,9 @@ William O'Mullane
 
 \setDocAbstract{%
 This document is intended to form the basis for planning DP0 in the interim data facility.
-What is DP0 anyway ? What data will be there ?  How will it be served ? 
+What is DP0 anyway ? What data will be there ?  How will it be served ?
 What do we need to have ready when ?
-All shall be answered within. 
+All shall be answered within.
 }
 
 % Change history defined here.
@@ -46,17 +44,20 @@ All shall be answered within.
 \begin{document}
 
 % Create the title page.
-\maketitle
+%\maketitle
 % Frequently for a technote we do not want a title page  uncomment this to remove the title page and changelog.
-% use \mkshorttitle to remove the extra pages
 
-% ADD CONTENT HERE
-% You can also use the \input command to include several content files.
+\mkshorttitle
 
+\input{intro}
+\input{dp0}
+\input{plan}
+\input{other}
 \appendix
 % Include all the relevant bib files.
 % https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies
 \section{References} \label{sec:bib}
+\renewcommand{\refname}{}
 \bibliography{local,lsst,lsst-dm,refs_ads,refs,books}
 
 % Make sure lsst-texmf/bin/generateAcronyms.py is in your path
@@ -65,6 +66,8 @@ All shall be answered within.
 % If you want glossary uncomment below -- comment out the two lines above
 %\printglossaries
 
+\section {Roles in Data Production FY21}
+\input{tables/teams}
 
 
 

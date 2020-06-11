@@ -1,0 +1,11 @@
+\section{Other experiments}
+Apart from the milestones and planning in \secref{sec:plan} there are some other activities it may be good to experiment with.
+
+\subsection{S3 access to NCSA}
+Storage remains the cost driver for cloud. We have an S3 interface exposing data a t NCSA,
+we could attempt some processing on the cloud accessing image data at NCSA.
+
+\subsection{Qserv 75\% scaling}
+Qserv scale tests should go to 75\% of DR1.  This requires a lot of nodes for a short time,
+we do not need to necessarily keep all those nodes once the test is done. This is an
+ideal cloud scenario if we have Qserv working in an understood manner on the cloud. \citeds{DMTN-125} would suggest we can at least do this in principle.
