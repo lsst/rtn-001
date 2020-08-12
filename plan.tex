@@ -57,14 +57,25 @@ still will need some experimentation to get it correct. Getting DC2 loaded in Qs
 we will have to do on IDF.
 
 \paragraph{Workflow} needs to be functioning at scale for DP0.2, ideally we should basic workflow
-early on (milestone DP-MW-M-02). Then more tooling such as restarting failed jobs (DP-MW-M-03)
+early on (milestone DP-MW-M-02). Then more tooling such as restarting failed jobs (DP-MW-M-03).
+
+From the construction side we have BPS as a deliverable which may be useful on IDF also. We shall evaluate BPS as an option later in 2020 (DP-MW-M07). See \citeds{LDM-636} \citeds{LDM-633} \citeds{DMTN-123}.
+BPS translates the quantum graph to DAGMan for execution on HTCondor and submits the jobs.
+Most work has gone into the graph and execution.
+
+As part of our march toward a potential more DOE oriented Data Facility BNL will be part of the the pre operations team to experiment with PanDA as an environment to monitor and control our HTCondor jobs.
+This is a slightly parallel effort to constriction attempting to take advantage of a large scale
+existing set of tools for large scale job execution. In an ideal world the quantum graph translation
+of BPS would feed into a PanDa system to execute (retry etc) our jobs.
+
+
 
 \subsubsection{ Science Platform}
 The science platform and web services need to be deployed. In principle this is reasonable straight forward, an open issue may be configuring of the Portal aspect for the chosen  dataset(s).
 
 \subsubsection{ Pipelines }
 For DP0.2 we need a Gen3 version of the pipelines to process the dataset. This will have to run at scale for PDR2 or DC2. There may be several runs for quality purposes.
-Fractional FTE from the Pipelines will provide help in pipeline configuration, data repo preparation, workflow consulting, science verification, data model documenting, troubleshooting, and liaisoning.
+Fractional FTE from the Pipelines will provide help in pipeline configuration, data repo preparation, workflow consulting, science verification, data model documenting, troubleshooting, and liaising.
 {\bf Yusra will provide more info here.}
 
 \subsubsection{ IN2P3}
