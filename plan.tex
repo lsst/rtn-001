@@ -66,9 +66,10 @@ Most work has gone into the graph and execution.
 As part of our march toward a potential more DOE oriented Data Facility BNL will be part of the the pre operations team to experiment with PanDA as an environment to monitor and control our HTCondor jobs.
 This is a slightly parallel effort to constriction attempting to take advantage of a large scale
 existing set of tools for large scale job execution. In an ideal world the quantum graph translation
-of BPS would feed into a PanDa system to execute (retry etc) our jobs.
+of BPS would feed into a PanDA system to execute (retry etc) our jobs.
 
-IN2P3 are also involved in IDF, they bring experience running Gen3 workflows. The real interest with IN2P3 is to run remote jobs thus emulating the eventual operational DRP runs. This may be difficult to achieve in FY21 but we should make it a milestone for FY22.\footnote{Tim, Fabio we should set a date for this}.
+See also \secref{sec:in2p3}.
+
 
 
 
@@ -80,5 +81,8 @@ For DP0.2 we need a Gen3 version of the pipelines to process the dataset. This w
 Fractional FTE from the Pipelines will provide help in pipeline configuration, data repo preparation, workflow consulting, science verification, data model documenting, troubleshooting, and liaising.
 {\bf Yusra will provide more info here.}
 
-\subsubsection{ IN2P3}
+\subsubsection{ IN2P3}\label{sec:in2p3}
 IN2P3 will contribute in Qserv and pipelines. {\bf Fabio will provide more information here.}
+They bring experience running Gen3 workflows. The real interest with IN2P3 is to run remote jobs thus emulating the eventual operational DRP runs. This may be difficult to achieve in FY21 but we should make it a milestone for FY22.\footnote{Tim, Fabio we should set a date for this}.
+
+Remote execution requires some  features in Gen3 to be implemented. We will probably wish to execute jobs with a local registry then merge the results and registries.
