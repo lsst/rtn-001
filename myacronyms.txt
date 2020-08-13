@@ -8,4 +8,5 @@
 
 
 DAGMan:Directed Acyclic Graph Manager
+CWL:Common Workflow Language
 
