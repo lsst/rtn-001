@@ -63,7 +63,7 @@ Questions:
 
 \item For either dataset if we take a subset to avoid the Gen2-Gen3 conversion issues or production scaling issues, will that reduce the usefulness of the datasets or affect the choice? What would be the smallest data size that is still scientifically interesting?
 
-\item Are there HiPs maps availble for either of these ?
+\item Are there HiPS maps available for either of these ?
 
 %butler moved to risks
 
@@ -78,7 +78,7 @@ Images will be stored in read-only Butler Gen3 repo.
 Catalogs will be stored in Qserv.
 
 We may provide images and catalogs from different production runs based on the same dataset.
-For example, in the strech goal of reprocessing the dataset in Gen 3, catalogs may not be available for Qserv to start ingesting in time. In such scenatio, we may choose to provide existing catalogs from the old run.
+For example, in the stretch goal of reprocessing the dataset in Gen 3, catalogs may not be available for Qserv to start ingesting in time. In such a scenario, we may choose to provide existing catalogs from the old run.
 
 The exact science data products depend on what exist in the provided data repository (if serving existing data products) or what pipelines are ready for our reprocessing.
 
@@ -164,5 +164,5 @@ In the long run costs may be higher than expected in a cloud based IDF. This wil
 An mitigation to this would be to store data on our own systems (NCSA or Chile) and expose it through S3.
 NCSA already have this in place and we should consider testing this for lesser used data sets.
 
-There is some risk that  Butler over S3 and Postgres  might not be at  production grade by DP0. We are working hard on that in construction. There is the possibility to run Gen 3 over a filesystem whic would not be ideal on the cloud. If Gen3 does not work at all we will have to have a major rethink and build a much simpler butler.
-Similarly, the workflow system and associated tools may not be mature enough for large-scale production. Scalibility in production is also not understood. We may need to limit the size of DP0 and rethink the system.
+There is some risk that  Butler over S3 and Postgres  might not be at  production grade by DP0. We are working hard on that in construction. There is the possibility to run Gen 3 over a filesystem which would not be ideal on the cloud. If Gen3 does not work at all we will have to have a major rethink and build a much simpler butler.
+Similarly, the workflow system and associated tools may not be mature enough for large-scale production. Scalability in production is also not understood. We may need to limit the size of DP0 and rethink the system.

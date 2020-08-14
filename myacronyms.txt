@@ -5,3 +5,8 @@
 #
 # Example:
 #   MIA:Missing In Action
+
+
+DAGMan:Directed Acyclic Graph Manager
+CWL:Common Workflow Language
+
