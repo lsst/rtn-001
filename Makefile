@@ -31,8 +31,16 @@ aglossary.tex :$(tex) myacronyms.txt
 
 # pick up this form the lsst-texmf/bin
 tables: .FORCE
-	cd tables; makeTablesFromGoogle.py 1RCXFwnVfXgR-WxFO4dfYRZuMX8egz35nABODKANEAUo miles\!A1:F Team\!A1:H
+	cd tables; makeTablesFromGoogle.py 1RCXFwnVfXgR-WxFO4dfYRZuMX8egz35nABODKANEAUo Team\!A1:H
 
+# milestones from Jira
+milestones: .FORCE 
+	( \
+	cd operations_milestones; \
+	source venv/bin/activate; \
+	python opsMiles.py -l -u ${USER}; \
+	mv milestones.tex .. \
+	)	
 
 .PHONY: clean
 clean:
@@ -46,8 +54,9 @@ clean:
 meta.tex: Makefile .FORCE
 	rm -f $@
 	touch $@
-	echo '% GENERATED FILE -- edit this in the Makefile' >>$@
-	/bin/echo '\newcommand{\lsstDocType}{$(DOCTYPE)}' >>$@
-	/bin/echo '\newcommand{\lsstDocNum}{$(DOCNUMBER)}' >>$@
-	/bin/echo '\newcommand{\vcsRevision}{$(GITVERSION)$(GITDIRTY)}' >>$@
-	/bin/echo '\newcommand{\vcsDate}{$(GITDATE)}' >>$@
+	printf '%% GENERATED FILE -- edit this in the Makefile\n' >>$@
+	printf '\\newcommand{\\lsstDocType}{$(DOCTYPE)}\n' >>$@
+	printf '\\newcommand{\\lsstDocNum}{$(DOCNUMBER)}\n' >>$@
+	printf '\\newcommand{\\vcsRevision}{$(GITVERSION)$(GITDIRTY)}\n' >>$@
+	printf '\\newcommand{\\vcsDate}{$(GITDATE)}\n' >>$@
+
