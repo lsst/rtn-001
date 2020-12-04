@@ -3,4 +3,4 @@
 	url = https://github.com/lsst-dm/images
 [submodule "operations_milestones"]
 	path = operations_milestones
-	url = git@github.com:womullan/operations_milestones.git
+	url = https://github.com/womullan/operations_milestones.git
