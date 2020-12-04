@@ -34,7 +34,7 @@ tables: .FORCE
 	cd tables; makeTablesFromGoogle.py 1RCXFwnVfXgR-WxFO4dfYRZuMX8egz35nABODKANEAUo Team\!A1:H
 
 # milestones from Jira
-milestones.tex: .FORCE 
+milestones.tex: 
 	( \
 	cd operations_milestones; \
 	source venv/bin/activate; \
