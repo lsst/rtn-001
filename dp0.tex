@@ -55,6 +55,10 @@ HSC PDR2 can either be converted from Gen 2 to Gen 3 or (stretch goal but ideall
 
 DC2 is available through Gen2 Butler and as we do not process that data with the Science Pipelines, the only option is conversion to Gen3. Estimates are that this is such a time-consuming process that it cannot be done in time to meet milestone L2-DP-0020. Therefore if DC2 is to be involved in the short term, a significantly smaller subset would have to be selected.
 
+In the case that we do not reprocess the data with updated Science Pipelines, we can serve the data as they are provided to us.
+For example, in DC2, DESC's codes were used to generate science-ready catalogs, which can be ingested into Qserv without further standardization.
+Detailed provenance between images in the Butler repo and the Qserv catalogs may not be provided in DP0.1, but improvements will be made in DP0.2 when we reprocess the data.
+
 Questions:
 
 \begin{itemize}
@@ -79,6 +83,10 @@ Catalogs will be stored in Qserv.
 
 We may provide images and catalogs from different production runs based on the same dataset.
 For example, in the stretch goal of reprocessing the dataset in Gen 3, catalogs may not be available for Qserv to start ingesting in time. In such a scenario, we may choose to provide existing catalogs from the old run.
+
+From DESC, DC2 catalogs can be obtained with more complete columns extracted from the original FITS files, or a modified schema to roughly match DPDD \citedsp{LSE-163}.
+The latter is closer to the eventual data access but the former allows additional scientific analysis.
+While it is feasible for Qserv and storage, we may provide both in DP0.1.
 
 The exact science data products depend on what exist in the provided data repository (if serving existing data products) or what pipelines are ready for our reprocessing.
 
