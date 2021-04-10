@@ -36,7 +36,7 @@ In this section we discuss the following key topics:
 
 \subsubsection {Dataset choice considerations} \label{sec:dataset}
 
-For DP0.1 we are moving ahead with DESC DR6 as the baseline. We may still load HSC at some point.
+For DP0.1 we are moving ahead with DESC DR6 WFD as the baseline. We may still load HSC at some point.
 
 
 We do no have  HiPS maps available for DP0.1.
@@ -56,13 +56,38 @@ From DESC, DC2 catalogs can be obtained with more complete columns extracted fro
 The latter is closer to the eventual data access but the former allows additional scientific analysis.
 We will provide both in DP0.1. (See milestones L3-MW-0010 and L3-MW-0020 for Qserv loading)
 
-The exact science data products depend on what exist in the provided data repository (if serving existing data products) or what pipelines are ready for our reprocessing.
+Specifically, in DP0.1, the following tables from DESC will be provided as one database \texttt{dp01\_dc2\_catalogs} in one TAP schema:
+\begin{itemize}
+\item \texttt{position}: DESC internal data as ingested in DESC's Qserv instance at IN2P3.
+\item \texttt{dpdd\_ref}: DESC internal data as ingested in DESC's Qserv instance at IN2P3.
+\item \texttt{dpdd\_forced}: DESC internal data as ingested in DESC's Qserv instance at IN2P3.
+\item \texttt{object}: DESC internal data v2 at NERSC provided to us in parquet format.
+\item \texttt{truth\_match}: DESC internal data v2 at NERSC provided to us in parquet format.
+\end{itemize}
+
+The science data products in the Butler Gen3 repository depend on the availability in the DESC-provided Gen2 data repository and the Gen2-to-3 conversion.
+Besides raw data, the following 4 reruns were obtained from DESC's copy at IN2P3.
+\begin{itemize}
+\item \texttt{run2.2i-calexp-v1} (Gen2) \texttt{2.2i/runs/DP0.1/calexp/v1} (Gen3)
+\item \texttt{run2.2i-coadd-wfd-dr6-v1-u} (Gen2) \texttt{2.2i/runs/DP0.1/coadd/wfd/dr6/v1/u} (Gen3)
+\item \texttt{run2.2i-coadd-wfd-dr6-v1-grizy} (Gen2) \texttt{2.2i/runs/DP0.1/coadd/wfd/dr6/v1/grizy} (Gen3)
+\item \texttt{run2.2i-coadd-wfd-dr6-v1} (Gen2) \texttt{2.2i/runs/DP0.1/coadd/wfd/dr6/v1} (Gen3)
+\end{itemize}
+
+Data were transferred from IN2P3 to NCSA, and converted into a Gen3 repository at NCSA.
+The repository provided on IDF is based on the DC2 repo at NCSA on March 16.
+Newer data ingested into NCSA's repo will not be ported to IDF.
+Some dataset types, such as warps, will not be provided.
+See Appendix \ref{sec:dp01butler} for a full list of expected dataset types in DP0.1.
+
+
+In DP0.2, the exact science data products depend on what pipelines are ready for our reprocessing.
 
 Questions:
 
 \begin{itemize}
 
-\item Are we offering parquet files? --- No promise. Currently our SDMified parquet-generating pipelines are HSC only and Gen2 only. If parquet files are offered the access will be via the read-only Butler Gen3 repo.
+\item Are we offering parquet files? --- No in DP0.1; likley yes in DP0.2. Currently our SDMified parquet-generating pipelines are HSC only and Gen2 only. If parquet files are offered the access will be via the read-only Butler Gen3 repo.
 
 \item We should presumably explicitly rule out bulk download  --- YES. However, this ({\it was} discussed at the 2019 PCW, as a potential mitigation against there not being batch compute available in DP0. If a particular group requested bulk download, it could be an opportunity to start developing that capability. We will also need to know whether to allow DESC bulk download access as part of the MOU to gain access to DC2: they may well want to download all the re-processed products, for their own purposes (and to develop their capability to ingest and work with bulk downloads).
 
