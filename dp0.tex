@@ -36,10 +36,11 @@ In this section we discuss the following key topics:
 
 \subsubsection {Dataset choice considerations} \label{sec:dataset}
 
-For DP0.1 we are moving ahead with DESC DR6 WFD as the baseline. We may still load HSC at some point.
+For DP0.1 we are moving ahead with DESC DR6 WFD as the baseline.
+See Appendix \ref{sec:datasetHistory} for historical context on the dataset choice.
 
 
-We do no have  HiPS maps available for DP0.1.
+We do not have  HiPS maps available for DP0.1.
 
 
 
@@ -87,9 +88,10 @@ Questions:
 
 \begin{itemize}
 
-\item Are we offering parquet files? --- No in DP0.1; likley yes in DP0.2. Currently our SDMified parquet-generating pipelines are HSC only and Gen2 only. If parquet files are offered the access will be via the read-only Butler Gen3 repo.
+\item Are we offering Parquet files? --- No in DP0.1; likely yes in DP0.2. Currently our SDMified Parquet-generating pipelines are HSC only and Gen2 only. If Parquet files are offered the access will be via the read-only Butler Gen3 repo.
 
-\item We should presumably explicitly rule out bulk download  --- YES. However, this ({\it was} discussed at the 2019 PCW, as a potential mitigation against there not being batch compute available in DP0. If a particular group requested bulk download, it could be an opportunity to start developing that capability. We will also need to know whether to allow DESC bulk download access as part of the MOU to gain access to DC2: they may well want to download all the re-processed products, for their own purposes (and to develop their capability to ingest and work with bulk downloads).
+\item We should presumably explicitly rule out bulk download  --- YES.
+We have ruled out offering bulk download facilities for DP0.1.  They are unlikely to be available at any time during the DP0 era, but we are still evaluating that against the time scale of the Data Previews and the schedule for the remaining required development effort. Making bulk download available had previously been discussed as a possible mitigation for the absence of user-facing batch compute in DP0. We still need to determine whether we need to provide some form of bulk access to DESC to return the Rubin-processed DC2 data from DP0.2 to them for their own use, both for scientific purposes and to allow them to develop their capability to ingest and work with bulk download.
 
 
 \end{itemize}
