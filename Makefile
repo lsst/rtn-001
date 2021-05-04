@@ -31,7 +31,7 @@ aglossary.tex :$(tex) myacronyms.txt
 
 # pick up this form the lsst-texmf/bin
 tables: .FORCE
-	cd tables; makeTablesFromGoogle.py 1RCXFwnVfXgR-WxFO4dfYRZuMX8egz35nABODKANEAUo Team\!A1:H
+	cd tables; makeTablesFromGoogle.py 1RCXFwnVfXgR-WxFO4dfYRZuMX8egz35nABODKANEAUo Team\!A1:J
 
 # milestones from Jira
 milestones.tex: 
