@@ -34,12 +34,12 @@ tables: .FORCE
 	cd tables; makeTablesFromGoogle.py 1RCXFwnVfXgR-WxFO4dfYRZuMX8egz35nABODKANEAUo Team\!A1:J
 
 # milestones from Jira
-milestones.tex: 
+openMilestones.tex: 
 	( \
 	cd operations_milestones; \
 	source venv/bin/activate; \
-	python opsMiles.py -l -u ${USER}; \
-	mv milestones.tex .. \
+	python opsMiles.py -ls -u ${USER}; \
+	mv *Milestones.tex .. \
 	)	
 
 .PHONY: clean
