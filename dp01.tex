@@ -1,0 +1,129 @@
+
+\subsection{Elements of Data Preview 0.1} \label{sec:dp0.1}
+
+% PJM: Is this section only about DP0.1, serving catalog data from pre-processed images? I think we need to explain the different phases of DP0 at the start, when we show the milestones. And then conisder the dataset options in that context, eg it could be a different mix of data in DP0.1 from DP0.2. Note that a DP0.3 is also possible, given the time available in FY22.
+
+In this section we discuss the following key topics:
+
+\begin{itemize}
+
+\item Dataset choice considerations
+
+\item Data products offered
+
+\item Services offered
+
+\item Audience considerations
+
+\end{itemize}
+
+\subsubsection {Dataset choice considerations} \label{sec:dataset}
+
+For DP0.1 we are moving ahead with DESC DR6 WFD as the baseline.
+See Appendix \ref{sec:datasetHistory} for historical context on the dataset choice.
+
+
+We do not have  HiPS maps available for DP0.1.
+
+
+
+\subsubsection{Data Products Offered}
+
+We will offer access to images and catalogs, though in more limited ways that will be available in Operations.
+Images will be stored in read-only Butler Gen3 repo.
+Catalogs will be stored in Qserv. Source catalogs are not part of the DESC DR6.
+
+For DP0.2 we may provide images and catalogs from different production runs based on the same dataset.
+For example, in the stretch goal of reprocessing the dataset in Gen 3, catalogs may not be available for Qserv to start ingesting in time. In such a scenario, we may choose to provide existing catalogs from the old run.
+
+From DESC, DC2 catalogs can be obtained with more complete columns extracted from the original FITS files, or a modified schema to roughly match DPDD \citedsp{LSE-163}.
+The latter is closer to the eventual data access but the former allows additional scientific analysis.
+We will provide both in DP0.1. (See milestones L3-MW-0010 and L3-MW-0020 for Qserv loading)
+
+Specifically, in DP0.1, the following tables from DESC will be provided as one database \texttt{dp01\_dc2\_catalogs} in one TAP schema in Rubin's Qserv instance running at the IDF.
+\begin{itemize}
+\item \texttt{position}: DESC internal data as ingested in DESC's Qserv instance at IN2P3.
+\item \texttt{reference} (originally named \texttt{dpdd\_ref} in DESC): DESC internal data as ingested in DESC's Qserv instance at IN2P3.
+\item \texttt{forced\_photometry} (originally named \texttt{dpdd\_forced} in DESC): DESC internal data as ingested in DESC's Qserv instance at IN2P3.
+\item \texttt{object}: DESC internal data v2 at NERSC provided to us in parquet format.
+\item \texttt{truth\_match}: DESC internal data v2 at NERSC provided to us in parquet format.
+\end{itemize}
+
+The science data products in the Butler Gen3 repository depend on the availability in the DESC-provided Gen2 data repository and the Gen2-to-3 conversion.
+In addition to the raw data, the following 4 reruns were obtained from DESC's copy at IN2P3.
+\begin{itemize}
+\item \texttt{run2.2i-calexp-v1} (Gen2) \texttt{2.2i/runs/DP0.1/calexp/v1} (Gen3)
+\item \texttt{run2.2i-coadd-wfd-dr6-v1-u} (Gen2) \texttt{2.2i/runs/DP0.1/coadd/wfd/dr6/v1/u} (Gen3)
+\item \texttt{run2.2i-coadd-wfd-dr6-v1-grizy} (Gen2) \texttt{2.2i/runs/DP0.1/coadd/wfd/dr6/v1/grizy} (Gen3)
+\item \texttt{run2.2i-coadd-wfd-dr6-v1} (Gen2) \texttt{2.2i/runs/DP0.1/coadd/wfd/dr6/v1} (Gen3)
+\end{itemize}
+
+Data were transferred from IN2P3 to NCSA, and converted into a Gen3 repository at NCSA.
+The repository provided on IDF is based on the DC2 repo at NCSA on March 16.
+Newer data ingested into NCSA's repo will not be ported to IDF.
+Some dataset types, such as warps, will not be provided.
+See Appendix \ref{sec:dp01butler} for a full list of expected dataset types in DP0.1.
+
+
+In DP0.2, the exact science data products depend on what pipelines are ready for our reprocessing.
+
+We have ruled out offering bulk download facilities for DP0.
+The DESC DC2 dataset is public and can be downloaded from https://lsstdesc-portal.nersc.gov/
+
+Questions:
+
+\begin{itemize}
+
+\item Are we offering Parquet files? --- No in DP0.1; possibly in DP0.2. Currently our SDMified Parquet-generating pipelines are HSC only and Gen2 only. If Parquet files are offered the access will be via the read-only Butler Gen3 repo.
+
+
+\end{itemize}
+
+\subsubsection{Services Offered}
+
+Although DP0 as a milestone described \citeds{LSO-011} can be fulfilled with simple data distribution, we intend to offer limited Science Platform functionality as part of DP0. This includes:
+
+\begin{itemize}
+
+\item Provided the data is stored in Qserv or a Postgres database, catalogue access through TAP
+
+\item Access to the Science Platform's notebook-based analysis environment (Nublado); images can be accessed pragmatically via the Butler.
+
+\item Catalogue access only (no VO image services) via the Portal
+
+\item Authentication via Github (new self-service Identity Management system offering Federated Authentication will be offered subsequently to DP 0.1)
+
+\end{itemize}
+
+Shell access (except through Nublado) will not be offered.
+
+The science platform will be reachable as data.lsst.cloud ("data" is specified by the Product Owner, "lsst" represents the eventual access to the Legacy Survey of Space and Time, and ".cloud" represents the GCP-deployed IDF, allowing us to bring up the USDF in parallel under a different TLD such as data.lsst.us.
+
+\subsubsection{Audience Considerations}
+
+Care should be taken to limit the target audience for the data previews; it is most critical that this is done for DP0.
+
+\begin{itemize}
+
+\item We have limited capacity to divert resources to support users.
+
+\item We will not have performed scaling tests on the Science Platform services by that point; current Science Platform usage is under 100 users, and any intent to exceed that should be communicated well in advance
+
+\item We will not yet have the ability to throttle excessive IDF usage
+
+\end{itemize}
+
+Authorization will be provided in an all-in basis (users will have the same level of access as project members currently have) since finer access control mechanisms will not be available by DP0; care should be taken in selecting them.
+
+Questions:
+
+\begin{itemize}
+
+\item What is the authorization constraints for this data? For example, are DC2 data products only available to DESC science collaboration members? If so, if DC2 is chosen, does only DESC participate in DP0?
+	{\bf No: When agreed, DC2 would be available to all data rights holders.}
+
+\item How do we handle access? First come first served? Do we need a sign-up process?
+
+%support moved to SP section
+\end{itemize}
+

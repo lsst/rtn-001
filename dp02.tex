@@ -1,0 +1,55 @@
+\subsection{DP0.2 - processing} \label{sec:dp0.2}
+
+The Milestone L2-DP-0040 includes re processing on IDF of the data set previously served as part of L2-DP-0020.
+This requires a workflow system and associated tools to preferably make this quite automated.
+Demonstrating a portable set of cloud enabled tools based on Butler Gen3 and PanDA would help to allay the main risk of moving to a new Data Facility in operations.
+As of today, processing based on Butler Gen3 has been limited to a very small scale, and no scalability testing has been performed. For L2-DP-0040 we intend to reprocess DC2 RC6  dataset late in 2021 or early 2022.
+
+\subsubsection {Purpose of DP0.2}
+The purpose of DP0.2 is manifold, in order of priority:
+\begin{enumerate}
+	\item generate a fully self-consistent data release for the scientists to publish papers on
+	\item Is the purpose to follow a formal data release process with backporting and CCB approvals before allowing new software versions to be used but still taking into account that construction is still ongoing and some flexibility is warranted
+	\item perform mini runs early on to improve the chosen pipeline release
+
+	\item Serve as an operations rehearsal for DRP.
+\end{enumerate}
+
+
+\subsubsection {Policy committee} \label{sec:policy}
+
+There are certain decisions which will need to be made are best handled in a smaller forum than DPLT.
+This may include:
+
+\begin{itemize}
+\item Campaign polices
+\item Version of pipelines to use and patches which are needed
+\item Version of QA tooling which needs to run (and where/how to run it)
+\item Other operational considerations
+\end{itemize}
+
+Such decisions will be endorsed by DPLT but advised by a smaller committee more connected to the issues.
+The members will be the following (or their delegated representative):
+
+\begin{itemize}
+\item Hsin-Fang Chiang
+\item Tim Jenness
+\item Yusra AlSayyad
+\item Colin Slater
+\end{itemize}
+
+This is basically  one representative each from Science Pipelines, V\&V, Middleware, and Execution.
+It also serves as a trial for operations proper.
+
+\subsubsection {Science pipelines release} \label{sec:release}
+We have milestone L3-AP-0010  for the DP0.2 release which is satisfied by v22.0.1 of the science pipelines. This will be good to evaluate PanDA.
+For the actual reprocessing, given the timeline, we will make a v23 release when we have the weekly in a state we feel os good for DP0.2.
+Should that need fixes they will then be incremental patches on v23.
+
+Hence the delivery of v23  will be driven by the need for DP0.2 rather than time based - this is a more operational way to approach the release.
+It will also require support of this releases version for a period of time. This implies backporting agreed fixes (through RFC to DMCCB). A support period of one year seems reasonable.
+\subsection {Workflow engine}
+BNL have been working to demonstrate PanDA with Gen3 for a while. July 2021 is a decision point on using this for DP0.2
+\citeds{RTN-013} provided the goals for this task. \citeds{DMTN-168} provides guidelines on how to use this system.
+
+
