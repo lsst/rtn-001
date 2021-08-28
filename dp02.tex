@@ -53,7 +53,7 @@ It will also require support of this releases version for a period of time. This
 Despite that the processing workflow is expressed by a "quantum graph" in the Gen3 middleware, it is not feasible to generate the entire DP0.2 processing workflow in one quantum graph.
 Splitting the DP0.2 workflow into multiple BPS submissions is necessary with the current software.
 There are different ways to constitute the grouping; the two main options are to manage by sky location and to manage by pipeline step.
-Each step is a subset of pipelines as in the pipeline definition files.
+Each step is a subset of pipelines as in the pipeline definition file\footnote{\url{https://github.com/lsst/obs_lsst/blob/master/pipelines/imsim/DRP.yaml}}.
 For DP0.2 processing, we will manage by step and sequence points will be introduced between the steps.
 This is not strictly necessary for the DC2 data, but it is the expected mode of processing the actual Rubin data in the future.
 
@@ -61,14 +61,21 @@ All calibration data will be ingested into the butler repository before any step
 The processing steps and the grouping will be the following:
 \begin{enumerate}
   \item \texttt{step1}: isr, characterizeImage, calibrate, writeSourceTable, and transformSourceTable. Processing in this step is independent per detector. We plan to separate all visits into groups and generate one quantum graph (and hence one BPS submission) per visit group. Each quantum graph should have a reasonable size.
+\texttt{tract} constraints should not appear in the data query.
   \item Between \texttt{step1} and \texttt{step2}, iterations may be done to fix detector failures using code patch.
-  \item \texttt{step2}: consolidateSourceTable and consolidateVisitSummary. Processing in this step is independent per visit. Either the same grouping as in \texttt{step1} or a larger grouping with more visits per quantum graph will be used.
+  \item \texttt{step2}: consolidateSourceTable, consolidateVisitSummary, makeCcdVisitTable, and makeVisitTable. Processing in this step is independent per visit. Either the same grouping as in \texttt{step1} or a larger grouping with more visits per quantum graph will be used.
   \item \texttt{step3}: coaddition, multiband, object table generation, and other tract-based tasks. Processing in this step is independent per tract. Multiple tracts can be combined and processed together in one quantum graph.
-  \item \texttt{step4}: image differencing, forcedPhotCcd, forcedPhotDiffim, and transformDiaSourceCat. Processing in this step is independent per visit. Same grouping as in \texttt{step1} will be used.
-  \item \texttt{step5}: consolidateDiaSourceTable, drpAssociation, and drpDiaCalculation.
-Processing in this step is independent per tract (?)
-Multiple tracts can be combined and processed together in one quantum graph (?)
+  \item \texttt{step4}: image differencing, forcedPhotCcd, forcedPhotDiffim, and transformDiaSourceCat. Processing in this step is independent per detector. Groups of visits as in \texttt{step1} will be used.
+  \item \texttt{step5}: drpAssociation, drpDiaCalculation, and other per-tract forced photometry tasks.
+(Remove consolidateDiaSourceTable from this step?)
+Processing in this step is independent per tract.
+Sam grouping as in \texttt{step3} will be used.
+  \item Between \texttt{step4} and \texttt{step6}, iterations may be done to fix detector failures using code patch.
+  \item \texttt{step6}: consolidateDiaSourceTable. Final per-visit grouping.
 \end{enumerate}
+
+What tasks each step includes may change until the v23 stack release and is updated in the \texttt{obs\_lsst} package of the software stack (\url{https://github.com/lsst/obs_lsst/blob/master/pipelines/imsim/DRP.yaml}).
+However, the grouping (visit-based or tract-based) is fixed.
 
 \figref{fig:highLevelWorkflow} illustrates the high level concept and the dependency between individual submissions.
 
@@ -83,8 +90,9 @@ Multiple tracts can be combined and processed together in one quantum graph (?)
 Open issues:
 \begin{enumerate}
   \item Will DP0.2 run calibration product production and generate new master calibration data, or use existing calibration data?
+Calibration data from DP0.1's repo will be used.
   \item Should \texttt{analysis\_drp} be included? Probably yes and it will be added into one of the existing steps.
-  \item Should \texttt{faro} be included? Probably yes. But it should be combined into the existing DRP steps in the pipeline definitions and no extra step is expected from \texttt{faro}.
+  \item Should \texttt{faro} be included? Probably yes. \texttt{faro} tasks should be combined into the existing DRP steps in the pipeline definitions and no extra step is expected from \texttt{faro}.
   \item Is there any other analysis pipeline that needs to be run? The assumption is no.
   \item Is there anything else that needs to be run and not included in the "steps"? The assumption is no.
 \end{enumerate}
