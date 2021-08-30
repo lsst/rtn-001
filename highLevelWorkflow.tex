@@ -1,5 +1,5 @@
 \begin{tikzpicture}[->]
-  \node[draw,fill=black,text=white] (step0) at (10,10) {Calibration Ready};
+  \node[draw,fill=black,text=white] (step0) at (10,10) {Calibration Ready; Butler Repo Ready};
 
   \node[draw] (step1v1) at (3,9) {step1, visit group1};
   \node[draw] (step1v2) at (7,9) {step1, visit group2};
@@ -48,6 +48,17 @@
   \node[draw] (step5v2) at (9.5,1) {step5, tract2};
   \node[draw] (step5v3) at (13.5,1) {step5, tract3};
   \foreach \to in {step5v1,step5v2,step5v3}
+    \draw (sq4) -- (\to);
+
+  %\node[draw,fill=black,text=white] (sq4) at (10,0) {Seq Pt};
+  %\foreach \from in {step4v1,step4v2,step4v3,step4v4}
+  %  \draw (\from) -- (sq4);
+
+  \node[draw] (step6v1) at (3,0) {step6, visit group1};
+  \node[draw] (step6v2) at (7,0) {step6, visit group2};
+  \node[draw] (step6v3) at (11,0) {step6, visit group3};
+  \node[draw] (step6v4) at (15,0) {step6, visit groupN};
+  \foreach \to in {step6v1,step6v2,step6v3,step6v4}
     \draw (sq4) -- (\to);
 
 \end{tikzpicture}

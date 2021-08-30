@@ -57,7 +57,7 @@ Each step is a subset of pipelines as in the pipeline definition file\footnote{\
 For DP0.2 processing, we will manage by step and sequence points will be introduced between the steps.
 This is not strictly necessary for the DC2 data, but it is the expected mode of processing the actual Rubin data in the future.
 
-All calibration data will be ingested into the butler repository before any step starts.
+All calibration data will exist in the butler repository before any step starts.
 The processing steps and the grouping will be the following:
 \begin{enumerate}
   \item \texttt{step1}: isr, characterizeImage, calibrate, writeSourceTable, and transformSourceTable. Processing in this step is independent per detector. We plan to separate all visits into groups and generate one quantum graph (and hence one BPS submission) per visit group. Each quantum graph should have a reasonable size.
@@ -67,15 +67,15 @@ The processing steps and the grouping will be the following:
   \item \texttt{step3}: coaddition, multiband, object table generation, and other tract-based tasks. Processing in this step is independent per tract. Multiple tracts can be combined and processed together in one quantum graph.
   \item \texttt{step4}: image differencing, forcedPhotCcd, forcedPhotDiffim, and transformDiaSourceCat. Processing in this step is independent per detector. Groups of visits as in \texttt{step1} will be used.
   \item \texttt{step5}: drpAssociation, drpDiaCalculation, and other per-tract forced photometry tasks.
-(Remove consolidateDiaSourceTable from this step?)
 Processing in this step is independent per tract.
-Sam grouping as in \texttt{step3} will be used.
+Final per-tract grouping.
+Same tract grouping as in \texttt{step3} will be used.
   \item Between \texttt{step4} and \texttt{step6}, iterations may be done to fix detector failures using code patch.
-  \item \texttt{step6}: consolidateDiaSourceTable. Final per-visit grouping.
+  \item \texttt{step6}: consolidateDiaSourceTable. Final per-visit grouping. Groups of visits as in \texttt{step1} will be used.
 \end{enumerate}
 
 What tasks each step includes may change until the v23 stack release and is updated in the \texttt{obs\_lsst} package of the software stack (\url{https://github.com/lsst/obs_lsst/blob/master/pipelines/imsim/DRP.yaml}).
-However, the grouping (visit-based or tract-based) is fixed.
+However, the number of steps and the grouping (visit-based or tract-based) will be frozen in an earlier milestone before v23 release.
 
 \figref{fig:highLevelWorkflow} illustrates the high level concept and the dependency between individual submissions.
 
