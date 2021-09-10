@@ -72,6 +72,8 @@ Final per-tract grouping.
 Same tract grouping as in \texttt{step3} will be used.
   \item Between \texttt{step4} and \texttt{step6}, iterations may be done to fix detector failures using code patch.
   \item \texttt{step6}: consolidateDiaSourceTable. Final per-visit grouping. Groups of visits as in \texttt{step2} will be used.
+  \item \texttt{step7}: an afterburner that aggregates all tracts into one global file and make a global per-survey property map.
+This depends only on the products from \texttt{healSparsePropertyMaps} in \texttt{step3} and can be run after \texttt{step3} is done.
 \end{enumerate}
 
 What tasks each step includes may change until the v23 stack release and is updated in the \texttt{obs\_lsst} package of the software stack (\url{https://github.com/lsst/obs_lsst/blob/master/pipelines/imsim/DRP.yaml}).
@@ -92,6 +94,7 @@ Discussions:
   \item Will DP0.2 run calibration product production and generate new master calibration data? No, existing calibration data from DP0.1's repo will be used.
   \item Should \texttt{analysis\_drp} be included? Probably yes and it will be added into one of the existing steps before the freeze date.
   \item Should \texttt{faro} be included? Probably yes. \texttt{faro} tasks should be combined into the existing DRP steps in the pipeline definitions and no extra step is expected from \texttt{faro}. They will be added before the freeze date.
+  \item The afterburner task in \texttt{step7} is not written yet but will be added as a proper Gen3 pipetask before the freeze date.
   \item Non-Gen3 tasks such as \texttt{pipe\_analysis}, \texttt{qa\_explorer}, \texttt{validate\_drp}, \texttt{verify}, etc. will not be included in DP0.2 production.
   \item Is there any other analysis pipeline that needs to be run? The assumption is no.
   \item Is there anything else that needs to be run and not included in the "steps"? The assumption is no.
