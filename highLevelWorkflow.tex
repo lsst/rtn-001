@@ -53,15 +53,15 @@
   \foreach \to in {step5v1,step5v2,step5v3}
     \draw (sq4) -- (\to);
 
-  %\node[draw,fill=black,text=white] (sq4) at (10,0) {Seq Pt};
-  %\foreach \from in {step4v1,step4v2,step4v3,step4v4}
-  %  \draw (\from) -- (sq4);
+  \node[draw,fill=black,text=white] (sq5) at (10,0) {Seq Pt};
+  \foreach \from in {step5v1,step5v2,step5v3}
+    \draw (\from) -- (sq5);
 
-  \node[draw] (step6v1) at (3,0) {step6, visit group1};
-  \node[draw] (step6v2) at (7,0) {step6, visit group2};
-  \node[draw] (step6v3) at (11,0) {step6, visit group3};
-  \node[draw] (step6v4) at (15,0) {step6, visit groupN};
+  \node[draw] (step6v1) at (3,-1) {step6, visit group1};
+  \node[draw] (step6v2) at (7,-1) {step6, visit group2};
+  \node[draw] (step6v3) at (11,-1) {step6, visit group3};
+  \node[draw] (step6v4) at (15,-1) {step6, visit groupN};
   \foreach \to in {step6v1,step6v2,step6v3,step6v4}
-    \draw (sq4) -- (\to);
+    \draw (sq5) -- (\to);
 
 \end{tikzpicture}
