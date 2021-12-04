@@ -111,3 +111,24 @@ BNL have been working to demonstrate PanDA with Gen3 for a while. July 2021 is a
 \citeds{RTN-013} provided the goals for this task. \citeds{DMTN-168} provides guidelines on how to use this system.
 
 
+\subsection {Catalogs}
+In DP0.2, Science Pipelines reprocessed outputs include a number of catalogs
+as parquet data products.
+The parquet tables will be accessible as Butler datasets along with other DP0.2 data products, and their contents will be ingested in Qserv and made availble through TAP.
+The Butler dataset names of these tables are the following:
+\begin{enumerate}
+  \item \texttt{objectTable\_tract}
+  \item \texttt{sourceTable\_visit}
+  \item \texttt{forcedSourceTable}
+  \item \texttt{diaObjectTable\_tract}
+  \item \texttt{diaSourceTable\_tract}
+  \item \texttt{forcedSourceOnDiaObjectTable\_tract}
+\end{enumerate}
+
+There will also be parquet data products \texttt{visitTable} and \texttt{ccdVisitTable} in the Butler repo, but it is not decided yet whether they will be ingested in Qserv and made availble through TAP.
+
+The following two tables from DP0.1 will be made available in DP0.2:
+\begin{enumerate}
+  \item \texttt{dp01\_dc2\_catalogs.truth\_match}
+  \item \texttt{dp01\_dc2\_catalogs.object}
+\end{enumerate}
